@@ -27,7 +27,7 @@ export default function Navbar() {
       </button>
 
       <div
-        className={`lg:hidden block fixed  top-0 h-screen w-[65%] bg-neutral z-10  ${
+        className={`lg:hidden block fixed  top-0 h-screen w-[50%] bg-neutral z-10  ${
           isOpen ? "right-0 duration-500" : "right-[-100%] duration-500"
         }`}
       >

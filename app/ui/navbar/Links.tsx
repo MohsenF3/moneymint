@@ -15,21 +15,21 @@ export default function Links({ handleMenue }: { handleMenue?: () => void }) {
   let isLogin = true;
   let isAdmin = true;
   return (
-    <ul className="menu lg:menu-horizontal pt-5">
+    <ul className="flex flex-col lg:flex-row items-start lg:items-center max-lg:p-5 gap-6 lg:gap-2">
       {handleMenue && (
         <button
-          className="flex items-center justify-end mb-10 pr-2"
+          className="flex items-center justify-end mb-10 p-2 w-full"
           onClick={handleMenue}
         >
           <IoClose size={40} />
         </button>
       )}
       {links.map((link) => (
-        <li key={link.id} className="px-1 ">
+        <li key={link.id}>
           <Link
             onClick={handleMenue}
             href={link.path}
-            className={`text-lg hover:bg-white rounded-full hover:text-neutral max-lg:mb-2 ${
+            className={`text-lg hover:bg-white rounded-full hover:text-neutral py-3 px-7 lg:px-4 duration-100 font-semibold ${
               pathname === link.path ? "bg-white text-neutral" : ""
             }`}
           >
@@ -42,25 +42,23 @@ export default function Links({ handleMenue }: { handleMenue?: () => void }) {
           {isAdmin ? (
             <li className="pr-2">
               <Link
-                href="/dashboard"
+                href="/admin"
                 onClick={handleMenue}
-                className="text-lg hover:bg-white rounded-full hover:text-neutral max-lg:mb-2"
+                className={`text-lg hover:bg-white rounded-full hover:text-neutral py-3 px-7 lg:px-4 duration-100 font-semibold ${
+                  pathname === "/admin" ? "bg-white text-neutral" : ""
+                }`}
               >
                 Admin
               </Link>
             </li>
           ) : null}
-          <button className="btn glass bg-red-500 text-white hover:bg-red-600 hover:scale-95 transition">
+          <button className="btn glass bg-red-500 text-white hover:bg-red-600 ml-5 hover:scale-95 transition">
             Logout
           </button>
         </>
       ) : (
         <li>
-          <Link
-            href="/login"
-            onClick={handleMenue}
-            className="text-lg hover:bg-white rounded-full hover:text-neutral"
-          >
+          <Link href="/login" onClick={handleMenue} className="btn btn-info">
             Login
           </Link>
         </li>
