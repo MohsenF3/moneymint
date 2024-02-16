@@ -1,3 +1,4 @@
+import { getPosts } from "@/app/lib/data";
 import { Post } from "@/app/lib/defenition";
 import { Metadata } from "next";
 import Image from "next/image";
@@ -7,18 +8,6 @@ import React from "react";
 export const metadata: Metadata = {
   title: " Blog ",
   description: " A collection of blog posts about various topics.",
-};
-
-const getPosts = async () => {
-  const response = await fetch("http://localhost:3000/api/blog", {
-    next: { revalidate: 60 },
-  });
-
-  if (!response.ok) {
-    throw new Error("Something went wrong");
-  }
-
-  return response.json();
 };
 
 export default async function Blog() {
@@ -45,7 +34,7 @@ export default async function Blog() {
 
             <div className="card-body px-1 capitalize">
               <h2 className="card-title">{post.title}</h2>
-              <p>{post.desc && post.desc.slice(0, 50)}...</p>
+              <p>{post.desc && post.desc.slice(0, 100)}...</p>
               <div className="card-actions justify-end">
                 <Link href={`/blog/${post.slug}`} className="btn btn-primary">
                   Read More

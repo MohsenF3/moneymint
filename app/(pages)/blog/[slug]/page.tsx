@@ -1,3 +1,4 @@
+import { getPost } from "@/app/lib/data";
 import { Post } from "@/app/lib/defenition";
 import PostUser from "@/app/ui/blog/PostUser";
 import { PostUserSkeleton } from "@/app/ui/skeletons";
@@ -15,18 +16,6 @@ export const generateMetadata = async ({
     title: post?.title,
     description: post?.desc,
   };
-};
-
-const getPost = async (slug: string) => {
-  const response = await fetch(`http://localhost:3000/api/blog/${slug}`, {
-    next: { revalidate: 60 },
-  });
-
-  if (!response.ok) {
-    throw new Error("Something went wrong");
-  }
-
-  return response.json();
 };
 
 export default async function SingleBlog({
@@ -51,16 +40,15 @@ export default async function SingleBlog({
 
       <div className="lg:col-span-2">
         <h2 className="text-3xl capitalize mb-5">{post?.title}</h2>
-        <div className="flex gap-5 mb-10">
+        <div className="flex items-center gap-5 mb-10">
           {post && (
             <Suspense fallback={<PostUserSkeleton />}>
-              <PostUser userId={post.userId} />
+              <PostUser
+                userId={post.userId}
+                published={post?.createdAt.toString().slice(4, 15)}
+              />
             </Suspense>
           )}
-          <div className="flex flex-col items-start">
-            <p className="text-gray-500">Published</p>
-            <p className="">{post?.createdAt.toString().slice(4, 15)}</p>
-          </div>
         </div>
         <p>{post?.desc}</p>
       </div>

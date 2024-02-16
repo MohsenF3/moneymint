@@ -1,19 +1,19 @@
-import LoginForm from "@/app/ui/login/LoginForm";
+import RegisterForm from "@/app/ui/register/RegisterForm";
 import { Metadata } from "next";
 import React from "react";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 
 export const metadata: Metadata = {
-  title: " Login ",
-  description: " Login page",
+  title: " Register ",
+  description: " Register page",
 };
 
-export default function Login() {
+export default function Register() {
   return (
     <div className="hero">
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="text-center lg:text-left">
-          <h1 className="text-5xl font-bold">Login now!</h1>
+          <h1 className="text-5xl font-bold">Sign up now!</h1>
           <p className="py-6">
             Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
             excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
@@ -23,7 +23,7 @@ export default function Login() {
 
         <div className="card shrink-0 w-full max-w-md shadow-2xl bg-base-100">
           <div className="flex md:flex-row flex-col md:items-center gap-3 pt-10 pb-5 px-4">
-            <form className="flex-1" >
+            <form className="flex-1">
               <button className="btn w-full">
                 <FaGithub size={20} />
                 <span>GitHub</span>
@@ -39,7 +39,7 @@ export default function Login() {
 
           <div className="divider">OR</div>
 
-          <LoginForm />
+          <RegisterForm />
         </div>
       </div>
     </div>

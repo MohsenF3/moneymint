@@ -1,7 +1,11 @@
+"use client";
+
+import React, { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import React from "react";
+import NavLink from "./NavLink";
+
 import { IoClose } from "react-icons/io5";
+import { AiOutlineMenu } from "react-icons/ai";
 
 const links = [
   { id: 1, name: "Home", path: "/" },
@@ -10,59 +14,79 @@ const links = [
   { id: 4, name: "Blog", path: "/blog" },
 ];
 
-export default function Links({ handleMenue }: { handleMenue?: () => void }) {
-  const pathname = usePathname();
-  let isLogin = true;
-  let isAdmin = true;
+export default function Links() {
+  const [isOpen, setIsOpen] = useState(true);
+
+  const session = true;
+  const isAdmin = true;
+
+  const handleMenue = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <ul className="flex flex-col lg:flex-row items-start lg:items-center max-lg:p-5 gap-6 lg:gap-2">
-      {handleMenue && (
-        <button
-          className="flex items-center justify-end mb-10 p-2 w-full"
-          onClick={handleMenue}
-        >
-          <IoClose size={40} />
-        </button>
-      )}
-      {links.map((link) => (
-        <li key={link.id}>
-          <Link
-            onClick={handleMenue}
-            href={link.path}
-            className={`text-lg hover:bg-white rounded-full hover:text-neutral py-3 px-7 lg:px-4 duration-100 font-semibold ${
-              pathname === link.path ? "bg-white text-neutral" : ""
-            }`}
-          >
-            {link.name}
-          </Link>
-        </li>
-      ))}
-      {isLogin ? (
-        <>
-          {isAdmin ? (
-            <li className="pr-2">
+    <div>
+      <div
+        className={`fixed lg:relative  top-0 max-lg:bg-neutral max-lg:h-screen max-lg:w-[50%] z-10 ${
+          isOpen
+            ? "max-lg:-right-full max-lg:duration-100"
+            : "max-lg:right-0 max-lg:duration-100"
+        }`}
+      >
+        <ul className="max-lg:self-start w-full flex flex-col lg:flex-row lg:items-center max-lg:p-5 lg:gap-2 gap-6">
+          {/* close sidebar menu btn */}
+          <button className="btn self-end lg:hidden" onClick={handleMenue}>
+            <IoClose size={30} />
+          </button>
+
+          {links.map((link) => (
+            <li key={link.id}>
+              <NavLink {...link} handleMenue={handleMenue} />
+            </li>
+          ))}
+
+          {session ? (
+            <>
+              {isAdmin ? (
+                <li className="pr-2">
+                  <NavLink
+                    path="/admin"
+                    name="Admin"
+                    handleMenue={handleMenue}
+                  />
+                </li>
+              ) : null}
+              <LogoutBtn />
+            </>
+          ) : (
+            <li>
               <Link
-                href="/admin"
+                href="/login"
                 onClick={handleMenue}
-                className={`text-lg hover:bg-white rounded-full hover:text-neutral py-3 px-7 lg:px-4 duration-100 font-semibold ${
-                  pathname === "/admin" ? "bg-white text-neutral" : ""
-                }`}
+                className="btn btn-info ml-5"
               >
-                Admin
+                Login
               </Link>
             </li>
-          ) : null}
-          <button className="btn glass bg-red-500 text-white hover:bg-red-600 ml-5 hover:scale-95 transition">
-            Logout
-          </button>
-        </>
-      ) : (
-        <li>
-          <Link href="/login" onClick={handleMenue} className="btn btn-info">
-            Login
-          </Link>
-        </li>
-      )}
-    </ul>
+          )}
+        </ul>
+      </div>
+
+      {/* open sidebar menu btn */}
+
+      <button className="btn lg:hidden" onClick={handleMenue}>
+        <AiOutlineMenu size={40} />
+      </button>
+    </div>
+  );
+}
+
+function LogoutBtn() {
+  return (
+    <form>
+      <button className="btn glass bg-red-500 text-white hover:bg-red-600 ml-5 hover:scale-95 transition">
+        Logout
+      </button>
+    </form>
   );
 }

@@ -27,6 +27,7 @@ export function BlogCardSkeleton() {
     <div className="lg:grid lg:grid-cols-3 flex flex-col gap-10 h-full py-5">
       <div className="skeleton w-full h-[30%] lg:h-full"></div>
       <div className="lg:col-span-2 ">
+        <div className="skeleton h-5 w-[30%] mb-5"></div>
         <PostUserSkeleton />
         <div className="skeleton h-5 w-full lg:w-[80%] mb-5"></div>
         <div className="skeleton h-5 w-full lg:w-[80%] mb-5"></div>
@@ -40,9 +41,15 @@ export function BlogCardSkeleton() {
 
 export function PostUserSkeleton() {
   return (
-    <div className="flex flex-col gap-4 w-52 mb-10">
-      <div className="flex gap-4 items-center">
-        <div className="skeleton w-16 h-16 rounded-full shrink-0"></div>
+    <div className="flex items-center gap-5 mb-5">
+      <div className="skeleton w-16 h-16 rounded-full shrink-0"></div>
+      <div className="flex flex-col items-center gap-2">
+        <div className="skeleton h-5 w-10"></div>
+        <div className="skeleton h-5 w-16"></div>
+      </div>
+      <div className="flex flex-col items-center gap-2">
+        <div className="skeleton h-5 w-10"></div>
+        <div className="skeleton h-5 w-16"></div>
       </div>
     </div>
   );

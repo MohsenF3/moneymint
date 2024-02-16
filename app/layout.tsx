@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./ui/globals.css";
 import Navbar from "./ui/navbar/Navbar";
 import Footer from "./ui/Footer";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +23,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <body className={`${inter.className} `}>
-        <div className="flex flex-col justify-between h-screen w-full container mx-auto py-5 max-lg:px-3 overflow-x-hidden">
+        <Toaster position="top-right" toastOptions={{ duration: 3000 }} />
+        <div className="flex flex-col justify-between h-screen w-full container mx-auto py-5 max-lg:px-3 ">
           <Navbar />
           {children}
           <Footer />

@@ -9,7 +9,7 @@ export type Post = {
 };
 
 export type User = {
-  _id: string;
+  id: string;
   username: string;
   email: string;
   img?: string;
@@ -23,6 +23,32 @@ export type CreatePostInitialState = {
     slug?: string[];
     img?: string[];
     desc?: string[];
+  };
+  message?: string | null;
+};
+
+export type NavLinkProps = {
+  id?: number;
+  name: string;
+  path: string;
+  handleMenue: () => void;
+};
+
+export type Session = {
+  user: {
+    name: string;
+    email: string;
+    image: string;
+  };
+  expires: string;
+};
+
+export type RegisterFormState = {
+  errors?: {
+    username?: string[];
+    email?: string[];
+    password?: string[];
+    confirmpassword?: string[];
   };
   message?: string | null;
 };
