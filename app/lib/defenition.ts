@@ -52,3 +52,13 @@ export type RegisterFormState = {
   };
   message?: string | null;
 };
+
+export type LoginFormState = {
+  message?: string | null;
+};
+
+export type CustomInputProps = {
+  type: string;
+  info: string;
+  errors?: string[] | undefined;
+};

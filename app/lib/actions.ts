@@ -3,7 +3,11 @@
 import { connectToDb } from "./utils";
 import { Post, User } from "./models";
 import { revalidatePath } from "next/cache";
+import { signIn, signOut } from "@/auth";
+import { AuthError } from "next-auth";
 import bcrypt from "bcryptjs";
+import { LoginFormState, RegisterFormState } from "./defenition";
+import { LoginFormSchema, RegisterFormSchema } from "./schema";
 
 export const addPost = async (formData: FormData) => {
   const { title, slug, img, userId, desc } = Object.fromEntries(formData);
@@ -75,83 +79,95 @@ export const deleteUser = async (id: string) => {
   }
 };
 
-// export const handleGithubLogin = async () => {
-//   await signIn("github");
-// };
+export const handleGithubLogin = async () => {
+  await signIn("github");
+};
 
-// export const handleLogout = async () => {
-//   await signOut();
-// };
+export const handleGoogleLogin = async () => {
+  await signIn("google");
+};
 
-// export const register = async (
-//   prevState: RegisterFormState,
-//   formData: FormData
-// ) => {
-//   const validatedFields = LoginFormSchema.safeParse(
-//     Object.fromEntries(formData)
-//   );
+export const handleLogout = async () => {
+  await signOut();
+};
 
-//   if (!validatedFields.success) {
-//     return {
-//       errors: validatedFields.error.flatten().fieldErrors,
-//       message: "Missing Fields. Failed to Register.",
-//     };
-//   }
+export const register = async (
+  preState: RegisterFormState,
+  formData: FormData
+) => {
+  const validatedFields = RegisterFormSchema.safeParse(
+    Object.fromEntries(formData)
+  );
 
-//   const { username, email, password, confirmpassword } = validatedFields.data;
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: "Missing Fields. Failed to Register.",
+    };
+  }
 
-//   if (password !== confirmpassword) {
-//     return {
-//       message: "Oops! password doesnt match",
-//     };
-//   }
+  const { username, email, password } = validatedFields.data;
 
-//   try {
-//     connectToDb();
+  try {
+    connectToDb();
 
-//     const user = await User.findOne({ username });
+    const user = await User.findOne({ email });
 
-//     if (user) {
-//       return {
-//         message: "Username already exists",
-//       };
-//     }
+    if (user) {
+      return {
+        message: "User already exists",
+      };
+    }
 
-//     const salt = await bcrypt.genSalt(10);
-//     const hashedPassword = await bcrypt.hash(password.toString(), salt);
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password.toString(), salt);
 
-//     const newUser = new User({
-//       username,
-//       email,
-//       password: hashedPassword,
-//     });
+    const newUser = new User({
+      username,
+      email,
+      password: hashedPassword,
+    });
 
-//     await newUser.save();
-//     await signIn("credentials", { username, password });
-//   } catch (error) {
-//     return {
-//       message: "Database Error: Failed to Register",
-//     };
-//   }
-//   redirect("/blog");
-// };
+    await newUser.save();
+    await signIn("credentials", { username, password });
+  } catch (error) {
+    if (error instanceof AuthError) {
+      return {
+        message: "Database Error: Failed to Register",
+      };
+    }
+    throw error;
+  }
+};
 
-// export const login = async (
-//   prevState: string | undefined,
-//   formData: FormData
-// ) => {
-//   const { username, password } = Object.fromEntries(formData);
-//   try {
-//     await signIn("credentials", { username, password });
-//   } catch (error) {
-//     if (error instanceof AuthError) {
-//       switch (error.type) {
-//         case "CredentialsSignin":
-//           return "Invalid credentials";
-//         default:
-//           return "Something went wrong.";
-//       }
-//     }
-//     throw error;
-//   }
-// };
+export const login = async (preState: LoginFormState, formData: FormData) => {
+  const validatedFields = LoginFormSchema.safeParse(
+    Object.fromEntries(formData)
+  );
+
+  if (!validatedFields.success) {
+    return {
+      message: "Missing Fields. Please fill out all fields.",
+    };
+  }
+
+  const { username, password } = validatedFields.data;
+
+  try {
+    await signIn("credentials", { username, password });
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case "CredentialsSignin":
+          return {
+            message: "Invalid credentials",
+          };
+        default:
+          return {
+            message: "Something went wrong",
+          };
+      }
+    }
+    throw error;
+  }
+};

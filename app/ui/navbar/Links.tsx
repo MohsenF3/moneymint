@@ -6,6 +6,8 @@ import NavLink from "./NavLink";
 
 import { IoClose } from "react-icons/io5";
 import { AiOutlineMenu } from "react-icons/ai";
+import { handleLogout } from "@/app/lib/actions";
+import { Session } from "next-auth";
 
 const links = [
   { id: 1, name: "Home", path: "/" },
@@ -14,11 +16,8 @@ const links = [
   { id: 4, name: "Blog", path: "/blog" },
 ];
 
-export default function Links() {
+export default function Links({ session }: { session: Session | null }) {
   const [isOpen, setIsOpen] = useState(true);
-
-  const session = true;
-  const isAdmin = true;
 
   const handleMenue = () => {
     setIsOpen(!isOpen);
@@ -45,9 +44,9 @@ export default function Links() {
             </li>
           ))}
 
-          {session ? (
+          {session?.user ? (
             <>
-              {isAdmin ? (
+              {session.user?.isAdmin ? (
                 <li className="pr-2">
                   <NavLink
                     path="/admin"
@@ -83,7 +82,7 @@ export default function Links() {
 
 function LogoutBtn() {
   return (
-    <form>
+    <form action={handleLogout}>
       <button className="btn glass bg-red-500 text-white hover:bg-red-600 ml-5 hover:scale-95 transition">
         Logout
       </button>

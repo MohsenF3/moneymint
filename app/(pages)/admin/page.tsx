@@ -3,9 +3,13 @@ import AllUsers from "@/app/ui/admin/AllUsers";
 import CreatePost from "@/app/ui/admin/CreatePost";
 import CreateUser from "@/app/ui/admin/CreateUser";
 import { AllPostsAndUsersSkeleton } from "@/app/ui/skeletons";
+import { auth } from "@/auth";
 import React, { Suspense } from "react";
 
 export default async function Admin() {
+  const session = await auth();
+  const userId = session?.user.id;
+
   return (
     <div className="flex flex-col gap-10 pt-10">
       {/* post */}
@@ -18,7 +22,7 @@ export default async function Admin() {
         </div>
         {/* create post form */}
         <div className="flex-1">
-          <CreatePost />
+          <CreatePost userId={userId} />
         </div>
       </div>
       {/* user */}

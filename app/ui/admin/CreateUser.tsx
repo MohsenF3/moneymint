@@ -1,9 +1,20 @@
+"use client";
+
 import { addUser } from "@/app/lib/actions";
-import React from "react";
+import React, { useRef } from "react";
 
 export default function CreateUser() {
+  const ref = useRef<HTMLFormElement>(null);
+
   return (
-    <form className=" mx-auto max-w-xl" action={addUser}>
+    <form
+      className=" mx-auto max-w-xl"
+      ref={ref}
+      action={async (formData) => {
+        await addUser(formData);
+        ref.current?.reset();
+      }}
+    >
       <h1 className="text-2xl font-bold mb-5">Add New User</h1>
       <input
         name="username"

@@ -17,6 +17,7 @@ export const getPost = async (slug: string) => {
   noStore();
   try {
     connectToDb();
+
     const newSlug = slug.replace(/%20/g, (match) => {
       if (match.includes("%20")) {
         return match.replace(/%20/, " ");

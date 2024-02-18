@@ -18,36 +18,38 @@ export default async function AllPosts() {
             : null;
 
           return (
-            <Link
-              href={`/blog/${post.slug}`}
-              key={post._id}
-              className="flex items-center justify-between mb-5"
-            >
-              <div className="flex items-center gap-5 ">
-                <div className="avatar">
-                  <div className="w-16 rounded-full">
-                    <Image
-                      src={post.img ? post.img : "/default-user.svg"}
-                      alt="Shoes"
-                      width={70}
-                      height={70}
-                      className="rounded-full"
-                      style={{ verticalAlign: "middle" }}
-                    />
+            <div className="flex items-center justify-between">
+              <Link
+                href={`/blog/${post.slug}`}
+                key={post._id}
+                className="flex items-center justify-between mb-5"
+              >
+                <div className="flex items-center gap-5 ">
+                  <div className="avatar">
+                    <div className="w-16 rounded-full">
+                      <Image
+                        src={post.img ? post.img : "/default-user.svg"}
+                        alt="Shoes"
+                        width={70}
+                        height={70}
+                        className="rounded-full"
+                        style={{ verticalAlign: "middle" }}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <span className="md:text-lg font-medium">{post.title}</span>
+                    <p className="text-sm">
+                      Published By
+                      <span className="text-green-500 font-medium ml-1">
+                        {userInfo?.username}
+                      </span>
+                    </p>
                   </div>
                 </div>
-                <div>
-                  <span className="md:text-lg font-medium">{post.title}</span>
-                  <p className="text-sm">
-                    Published By
-                    <span className="text-green-500 font-medium ml-1">
-                      {userInfo?.username}
-                    </span>
-                  </p>
-                </div>
-              </div>
+              </Link>
               <DeletePost id={post._id} />
-            </Link>
+            </div>
           );
         })}
       </div>

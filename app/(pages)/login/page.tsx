@@ -1,7 +1,8 @@
+import { handleGithubLogin, handleGoogleLogin } from "@/app/lib/actions";
+import SocialLoginBtns from "@/app/ui/SocialLoginBtns";
 import LoginForm from "@/app/ui/login/LoginForm";
 import { Metadata } from "next";
 import React from "react";
-import { FaGithub, FaGoogle } from "react-icons/fa";
 
 export const metadata: Metadata = {
   title: " Login ",
@@ -23,18 +24,17 @@ export default function Login() {
 
         <div className="card shrink-0 w-full max-w-md shadow-2xl bg-base-100">
           <div className="flex md:flex-row flex-col md:items-center gap-3 pt-10 pb-5 px-4">
-            <form className="flex-1" >
-              <button className="btn w-full">
-                <FaGithub size={20} />
-                <span>GitHub</span>
-              </button>
-            </form>
-            <form className="flex-1">
-              <button className="btn w-full">
-                <FaGoogle size={20} />
-                <span>Google</span>
-              </button>
-            </form>
+            <SocialLoginBtns
+              name="GitHub"
+              serverAction={handleGithubLogin}
+              icon="FaGithub"
+            />
+
+            <SocialLoginBtns
+              name="Google"
+              serverAction={handleGoogleLogin}
+              icon="FaGoogle"
+            />
           </div>
 
           <div className="divider">OR</div>
