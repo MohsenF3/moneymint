@@ -1,3 +1,6 @@
+import infoCards from "@/app/lib/placeholder-data";
+import AboutTitle from "@/app/ui/about/AboutTitle";
+import InfoCard from "@/app/ui/about/InfoCard";
 import { Metadata } from "next";
 import Image from "next/image";
 import React from "react";
@@ -9,47 +12,33 @@ export const metadata: Metadata = {
 
 export default function About() {
   return (
-    <div className="flex flex-col lg:flex-row-reverse w-full bg-transparent">
-      <div className="relative lg:w-[30rem] max-lg:mx-auto  max-lg:mb-10 lg:h-[30rem] w-[15rem] h-[15rem]">
+    <section
+      id="about"
+      className=" w-full flex relative items-center justify-center h-full max-md:my-[11rem] max-md:text-center"
+    >
+      <div className="absolute -z-10 h-full w-full overflow-hidden">
         <Image
           src="/about.svg"
-          alt="About Image"
           fill
-          className="rounded-full "
+          className="absolute object-cover w-full overflow-visible sm:rotate-90"
+          alt="Background Whirl"
         />
       </div>
-      <div className="me-auto max-w-2xl max-lg:w-full font-semibold">
-        <h1 className="text-3xl max-md:text-xl mb-5 text-info">About Agency</h1>
-        <h1 className="text-7xl max-lg:text-4xl leading-tight">
-          We create ideas that make a difference.
-        </h1>
-        <p className="my-5 text-gray-200 text-lg max-md:text-base">
-          Welcome to MoneyMint! We're on a mission to revolutionize the way you
-          earn. Our team is dedicated to sourcing and curating the most
-          effective money-making strategies, ensuring you're always one step
-          ahead in your financial journey.
-        </p>
-        <div>
-          <div className="stats stats-horizontal ">
-            <div className="stat border-none pl-0">
-              <div className="stat-value">5+</div>
-              <div className="stat-desc text-info">Year of experience</div>
-            </div>
-
-            <div className="stat">
-              <div className="stat-value">5K+</div>
-              <div className="stat-desc text-info">People reached</div>
-            </div>
-
-            <div className="stat">
-              <div className="stat-value">10K+</div>
-              <div className="stat-desc text-info whitespace-normal">
-                Services and plugins
-              </div>
-            </div>
-          </div>
+      <div className="w-full h-full flex items-center justify-center flex-col gap-8 max-w-7xl">
+        <AboutTitle />
+        <div className="w-full grid grid-cols-1 grid-rows-3 md:grid-cols-2 md:grid-rows-2 lg:grid-cols-3 lg:grid-rows-1 gap-4 justify-between relative">
+          {infoCards.map((infoCard) => {
+            return (
+              <InfoCard
+                key={infoCard.id}
+                Icon={infoCard.icon}
+                title={infoCard.title}
+                desc={infoCard.bodyText}
+              />
+            );
+          })}
         </div>
       </div>
-    </div>
+    </section>
   );
 }

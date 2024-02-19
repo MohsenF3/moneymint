@@ -3,7 +3,6 @@ import React from "react";
 export default function ContactForm() {
   return (
     <form className="flex-1 max-w-xl">
-      <h1 className="text-2xl mb-5 font-medium">Get in touch:</h1>
       <input
         type="text"
         name="name"

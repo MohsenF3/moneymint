@@ -17,7 +17,7 @@ const links = [
 ];
 
 export default function Links({ session }: { session: Session | null }) {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleMenue = () => {
     setIsOpen(!isOpen);
@@ -26,7 +26,7 @@ export default function Links({ session }: { session: Session | null }) {
   return (
     <div>
       <div
-        className={`fixed lg:relative  top-0 max-lg:bg-neutral max-lg:h-screen max-lg:w-[50%] z-10 ${
+        className={`fixed lg:relative top-0 max-lg:glass max-lg:h-screen max-lg:w-[60%] z-20 ${
           isOpen
             ? "max-lg:-right-full max-lg:duration-100"
             : "max-lg:right-0 max-lg:duration-100"
@@ -62,7 +62,7 @@ export default function Links({ session }: { session: Session | null }) {
               <Link
                 href="/login"
                 onClick={handleMenue}
-                className="btn btn-info ml-5"
+                className="btn btn-neutral ml-5"
               >
                 Login
               </Link>
