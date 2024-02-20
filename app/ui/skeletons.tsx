@@ -11,6 +11,22 @@ export function Skeleton() {
 
 export function BlogSkeleton() {
   return (
+    <>
+      <div className="skeleton h-10 w-full lg:w-[60%] mt-4"></div>
+      <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 py-10 gap-8">
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+      </div>
+    </>
+  );
+}
+
+export function BlogPostsSkeleton() {
+  return (
     <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 py-10 gap-8">
       <Skeleton />
       <Skeleton />

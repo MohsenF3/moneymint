@@ -13,6 +13,58 @@ export const getPosts = async () => {
   }
 };
 
+const ITEMS_PER_PAGE = 6;
+
+export async function fetchFilteredPosts(query: string, currentPage: number) {
+  const page = Math.max(currentPage - 1, 0); // Ensure page is a non-negative number
+
+  const regexQuery = new RegExp(query, "i"); // For case-insensitive regex search
+
+  try {
+    connectToDb();
+
+    // Find posts with the search query that also paginate results
+    const posts = await Post.find({
+      $or: [{ title: regexQuery }, { desc: regexQuery }],
+    })
+      .sort({ createdAt: -1 }) // Sorts by the date created
+      .skip(page * ITEMS_PER_PAGE) // Skip to the correct pagination
+      .limit(ITEMS_PER_PAGE); // Limit results
+
+    return posts;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch posts.");
+  }
+}
+
+export async function fetchPostsPages(query: string) {
+  try {
+    connectToDb();
+    // Constructing the query conditions
+    const regexQuery = { $regex: new RegExp(query, "i") };
+    const condition = {
+      $or: [
+        { title: regexQuery },
+        { desc: regexQuery },
+        { userId: regexQuery },
+        { slug: regexQuery },
+      ],
+    };
+
+    // Counting the total number of posts based on the query conditions
+    const count = await Post.countDocuments(condition);
+
+    // Calculating the total number of pages
+    const totalPages = Math.ceil(count / ITEMS_PER_PAGE);
+
+    return totalPages;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch total number of posts.");
+  }
+}
+
 export const getPost = async (slug: string) => {
   noStore();
   try {

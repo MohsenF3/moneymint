@@ -62,7 +62,7 @@ export default function Links({ session }: { session: Session | null }) {
               <Link
                 href="/login"
                 onClick={handleMenue}
-                className="btn btn-neutral ml-5"
+                className="btn btn-secondary ml-5"
               >
                 Login
               </Link>
@@ -83,7 +83,7 @@ export default function Links({ session }: { session: Session | null }) {
 function LogoutBtn() {
   return (
     <form action={handleLogout}>
-      <button className="btn glass bg-red-500 text-white hover:bg-red-600 ml-5 hover:scale-95 transition">
+      <button className="btn btn-error text-white  ml-5 hover:scale-95 transition">
         Logout
       </button>
     </form>

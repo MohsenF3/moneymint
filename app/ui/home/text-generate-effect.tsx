@@ -52,7 +52,7 @@ export const TextGenerateEffect = () => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 3.6 }}
+          transition={{ delay: 5.2 }}
           className="flex items-center gap-2"
         >
           <Link href="/about" className="btn btn-neutral">

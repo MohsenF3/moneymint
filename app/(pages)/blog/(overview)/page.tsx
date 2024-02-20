@@ -1,20 +1,40 @@
-import { getPosts } from "@/app/lib/data";
-import { Post } from "@/app/lib/defenition";
-import { BlogCard } from "@/app/ui/blog/BlogCard";
+import { fetchPostsPages } from "@/app/lib/data";
+import Pagination from "@/app/ui/blog/Pagination";
+import Posts from "@/app/ui/blog/Posts";
+import Search from "@/app/ui/blog/Search";
+import { BlogPostsSkeleton } from "@/app/ui/skeletons";
 import { Metadata } from "next";
-import React from "react";
+import React, { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: " Blog ",
   description: " A collection of blog posts about various topics.",
 };
 
-export default async function Blog() {
-  const posts: Post[] = await getPosts();
+export default async function Blog({
+  searchParams,
+}: {
+  searchParams?: {
+    query?: string;
+    page?: string;
+  };
+}) {
+  const query = searchParams?.query || "";
+  const currentPage = Number(searchParams?.page) || 1;
+
+  const totalPages = await fetchPostsPages(query);
 
   return (
-    <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 py-10 gap-10">
-      {posts && posts.map((post) => <BlogCard key={post._id} post={post} />)}
+    <div>
+      <div className=" mt-4">
+        <Search placeholder="Search..." />
+      </div>
+      <Suspense key={query + currentPage} fallback={<BlogPostsSkeleton />}>
+        <Posts query={query} currentPage={currentPage} />
+      </Suspense>
+      <div className="my-5 flex w-full justify-center">
+        <Pagination totalPages={totalPages} />
+      </div>
     </div>
   );
 }
