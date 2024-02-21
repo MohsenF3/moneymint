@@ -17,7 +17,7 @@ const links = [
 ];
 
 export default function Links({ session }: { session: Session | null }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   const handleMenue = () => {
     setIsOpen(!isOpen);
@@ -25,8 +25,14 @@ export default function Links({ session }: { session: Session | null }) {
 
   return (
     <div>
+      {/* overlay */}
       <div
-        className={`fixed lg:relative top-0 max-lg:glass max-lg:h-screen max-lg:w-[60%] z-20 ${
+        className={`lg:hidden absolute  top-0 bottom-0 left-0 w-[40%]  bg-[rgba(0,0,0,0.4)] bg-opacity-30 ${
+          isOpen ? "opacity-0 duration-100" : "opacity-100 duration-100"
+        }`}
+      />
+      <nav
+        className={`fixed lg:relative top-0  max-lg:glass  max-lg:h-screen max-lg:w-[60%] z-20 ${
           isOpen
             ? "max-lg:-right-full max-lg:duration-100"
             : "max-lg:right-0 max-lg:duration-100"
@@ -34,7 +40,10 @@ export default function Links({ session }: { session: Session | null }) {
       >
         <ul className="max-lg:self-start w-full flex flex-col lg:flex-row lg:items-center max-lg:p-5 lg:gap-2 gap-6">
           {/* close sidebar menu btn */}
-          <button className="btn self-end lg:hidden" onClick={handleMenue}>
+          <button
+            className="btn text-white light-white self-end lg:hidden"
+            onClick={handleMenue}
+          >
             <IoClose size={30} />
           </button>
 
@@ -62,18 +71,21 @@ export default function Links({ session }: { session: Session | null }) {
               <Link
                 href="/login"
                 onClick={handleMenue}
-                className="btn btn-secondary ml-5"
+                className="btn btn-info text-white  ml-5"
               >
                 Login
               </Link>
             </li>
           )}
         </ul>
-      </div>
+      </nav>
 
       {/* open sidebar menu btn */}
 
-      <button className="btn lg:hidden" onClick={handleMenue}>
+      <button
+        className="btn text-white light-white lg:hidden"
+        onClick={handleMenue}
+      >
         <AiOutlineMenu size={40} />
       </button>
     </div>

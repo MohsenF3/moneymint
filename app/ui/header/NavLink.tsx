@@ -9,8 +9,8 @@ export default function NavLink({ path, name, handleMenue }: NavLinkProps) {
     <Link
       onClick={handleMenue}
       href={path}
-      className={`text-lg hover:bg-white rounded-full hover:text-neutral py-3 px-7 lg:px-4 duration-100 font-semibold ${
-        pathname === path ? "bg-white text-neutral" : ""
+      className={`text-lg hover:bg-white rounded-full hover:text-neutral py-3 px-7 lg:px-4 duration-100 font-semibold links ${
+        pathname === path ? "bg-white text-neutral navlink" : ""
       }`}
     >
       {name}

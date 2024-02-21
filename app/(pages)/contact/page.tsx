@@ -1,4 +1,4 @@
-import { Lamp } from "@/app/ui/contact/lamp";
+import { ContactSection } from "@/app/ui/contact/ContactSection";
 import { Metadata } from "next";
 import React from "react";
 
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function Contact() {
-  return <Lamp />;
+  return <ContactSection />;
 }

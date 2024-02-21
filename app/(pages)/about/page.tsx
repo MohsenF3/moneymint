@@ -12,11 +12,8 @@ export const metadata: Metadata = {
 
 export default function About() {
   return (
-    <section
-      id="about"
-      className=" w-full flex relative items-center justify-center h-full max-md:my-[11rem] max-md:text-center"
-    >
-      <div className="absolute -z-10 h-full w-full overflow-hidden">
+    <div className=" w-full flex relative items-center justify-center  max-lg:my-5 max-md:text-center">
+      <div className="absolute h-full w-full ">
         <Image
           src="/about.svg"
           fill
@@ -39,6 +36,6 @@ export default function About() {
           })}
         </div>
       </div>
-    </section>
+    </div>
   );
 }

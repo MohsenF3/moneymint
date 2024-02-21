@@ -2,9 +2,9 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <div className="flex items-center justify-between z-10 pb-2 ">
-      <h3>MoneyMint</h3>
-      <div>MoneyMint &#169; All rights reserved.</div>
-    </div>
+    <footer className="flex items-center justify-between w-full z-10">
+      <h3 className="font-bold">MoneyMint</h3>
+      <div className="font-bold">MoneyMint &#169; All rights reserved.</div>
+    </footer>
   );
 }

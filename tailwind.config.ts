@@ -9,16 +9,16 @@ const config: Config = {
   daisyui: {
     themes: [
       {
-        mytheme: {
-          primary: "#b900ff",
-          secondary: "#008475",
-          accent: "#00c500",
-          neutral: "#032617",
+        dark: {
+          ...require("daisyui/src/theming/themes")["dark"],
           "base-100": "#101010",
-          info: "#00e5ff",
-          success: "#00c491",
-          warning: "#bf6f00",
-          error: "#ff8d9c",
+          accent: "#008475",
+        },
+      },
+      {
+        light: {
+          ...require("daisyui/src/theming/themes")["light"],
+          "base-100": "#F8FAE5",
         },
       },
     ],
