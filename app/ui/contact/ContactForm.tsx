@@ -1,5 +1,7 @@
 "use client";
 
+import { ContactFormProps } from "@/app/lib/defenition";
+import { usePathname } from "next/navigation";
 import React, { FormEvent, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -10,7 +12,10 @@ type Data = {
   message?: string;
 };
 
-export default function ContactForm() {
+export default function ContactForm({ info }: { info: ContactFormProps }) {
+  const pathName = usePathname();
+  const isFa = pathName.startsWith("/fa/");
+
   const [data, setData] = useState<Data>({
     name: "",
     email: "",
@@ -52,11 +57,15 @@ export default function ContactForm() {
   };
 
   return (
-    <form className="flex-1  max-w-xl" onSubmit={sendEmail}>
+    <form
+      className="flex-1  max-w-xl"
+      onSubmit={sendEmail}
+      dir={isFa ? "rtl" : "ltr"}
+    >
       <input
         type="text"
         name="name"
-        placeholder="Name"
+        placeholder={info.name}
         className="input input-bordered w-full mb-5"
         value={data.name}
         onChange={(e) => setData({ ...data, name: e.target.value })}
@@ -64,7 +73,7 @@ export default function ContactForm() {
       <input
         type="email"
         name="email"
-        placeholder="Email"
+        placeholder={info.email}
         className="input input-bordered w-full mb-5"
         value={data.email}
         onChange={(e) => setData({ ...data, email: e.target.value })}
@@ -72,7 +81,7 @@ export default function ContactForm() {
       <input
         type="number"
         name="number"
-        placeholder="Number(Optional)"
+        placeholder={info.number}
         className="input input-bordered w-full mb-5"
         value={data.number}
         onChange={(e) => setData({ ...data, number: e.target.value })}
@@ -80,11 +89,11 @@ export default function ContactForm() {
       <textarea
         name="message"
         className="textarea textarea-bordered w-full resize-none mb-5 min-h-40"
-        placeholder="Message"
+        placeholder={info.message}
         value={data.message}
         onChange={(e) => setData({ ...data, message: e.target.value })}
       />
-      <button className="btn btn-primary w-full">Send</button>
+      <button className="btn btn-primary w-full">{info.button}</button>
     </form>
   );
 }

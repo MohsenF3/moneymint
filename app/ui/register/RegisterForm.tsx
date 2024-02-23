@@ -7,8 +7,12 @@ import { useFormState } from "react-dom";
 import CustomInput from "../CustomInput";
 import toast from "react-hot-toast";
 import Button from "../Button";
+import { usePathname } from "next/navigation";
+import { RegisterFormProps } from "@/app/lib/defenition";
 
-export default function RegisterForm() {
+export default function RegisterForm({ info }: { info: RegisterFormProps }) {
+  const pathName = usePathname();
+  const isFa = pathName.startsWith("/fa/");
   const initialState = { message: null, errors: {} };
   const [state, dispatch] = useFormState(register, initialState);
 
@@ -33,32 +37,47 @@ export default function RegisterForm() {
   }
 
   return (
-    <form className="card-body pt-0" action={dispatch}>
+    <form
+      className="card-body pt-0"
+      action={dispatch}
+      dir={isFa ? "rtl" : "ltr"}
+    >
       <CustomInput
+        holder={info.username}
         info="username"
         type="text"
         errors={state?.errors?.username}
       />
-      <CustomInput info="email" type="email" errors={state?.errors?.email} />
       <CustomInput
+        holder={info.email}
+        info="email"
+        type="email"
+        errors={state?.errors?.email}
+      />
+      <CustomInput
+        holder={info.password}
         info="password"
         type="password"
         errors={state?.errors?.password}
       />
       <CustomInput
+        holder={info.confirmpassword}
         info="confirmpassword"
         type="password"
         errors={state?.errors?.confirmpassword}
       />
 
       <div className="form-control mt-6 mb-5">
-        <Button type="register" />
+        <Button name={info.button} />
       </div>
 
       <span>
-        Already have an account?
-        <Link href="/login" className="ml-1 link link-primary">
-          Login here
+        {info.title}
+        <Link
+          href={`/${isFa ? "fa" : "en"}/login`}
+          className="ml-1 link link-primary"
+        >
+          {info.loginlink}
         </Link>
       </span>
     </form>

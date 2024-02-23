@@ -2,8 +2,9 @@
 import React from "react";
 import { motion } from "framer-motion";
 import ContactForm from "./ContactForm";
+import { ContactSectionProps } from "@/app/lib/defenition";
 
-export const ContactSection = () => {
+export const ContactSection = ({ info }: { info: ContactSectionProps }) => {
   return (
     <div className="z-50 flex flex-col items-center">
       <div className="relative w-full isolate z-0 ">
@@ -48,9 +49,8 @@ export const ContactSection = () => {
           ease: "easeInOut",
         }}
         className="z-10 mt-[3rem] text-white light-white text-center text-3xl font-medium tracking-tight  md:text-5xl"
-      >
-        Get in Touch <br /> Contact Us for More Information:
-      </motion.h1>
+        dangerouslySetInnerHTML={{ __html: info.title }}
+      />
       <motion.div
         initial={{ opacity: 0.5, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -61,7 +61,7 @@ export const ContactSection = () => {
         }}
         className="mt-[2rem] z-10"
       >
-        <ContactForm />
+        <ContactForm info={info.form} />
       </motion.div>
     </div>
   );

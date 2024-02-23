@@ -1,13 +1,12 @@
+"use client";
+
 import { useEffect } from "react";
 import { motion, stagger, useAnimate } from "framer-motion";
 import { oswald } from "../fonts";
 
-const words =
-  "Welcome To Moneymint Where You Can Unlock Your Earning Potential";
-
-export const TextGenerateEffect = () => {
+export const TextGenerateEffect = ({ title }: { title: string }) => {
   const [scope, animate] = useAnimate();
-  let wordsArray = words.split(" ");
+  let wordsArray = title.split(" ");
   useEffect(() => {
     animate(
       "span",

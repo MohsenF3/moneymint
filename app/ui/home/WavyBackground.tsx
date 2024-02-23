@@ -2,14 +2,9 @@
 
 import React, { useEffect, useRef } from "react";
 import { createNoise3D } from "simplex-noise";
-import { motion } from "framer-motion";
-import Link from "next/link";
-import { TextGenerateEffect } from "./ui/home/text-generate-effect";
 
-export default function Home() {
+export default function WavyBackground() {
   const noise = createNoise3D();
-
-  // this is the background color
 
   let w: number,
     h: number,
@@ -67,38 +62,11 @@ export default function Home() {
       cancelAnimationFrame(animationId);
     };
   }, []);
-
   return (
-    <>
-      {/* wavy background */}
-
-      <canvas
-        className="absolute inset-0 z-0"
-        ref={canvasRef}
-        id="canvas"
-      ></canvas>
-
-      <div className="w-full h-full flex flex-col text-center items-center justify-center">
-        {/* title with animation*/}
-
-        <TextGenerateEffect />
-
-        {/* buttons */}
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 5.2 }}
-          className="z-10"
-        >
-          <Link href="/about" className="btn btn-accent mr-3">
-            About Us
-          </Link>
-          <Link href="/contact" className="btn btn-outline">
-            Contact
-          </Link>
-        </motion.div>
-      </div>
-    </>
+    <canvas
+      className="absolute inset-0 z-0"
+      ref={canvasRef}
+      id="canvas"
+    ></canvas>
   );
 }

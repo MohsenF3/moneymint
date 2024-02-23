@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import React from "react";
 import { CardBody, CardContainer, CardItem } from "./3d-card";
@@ -23,6 +21,7 @@ export function BlogCard({ post }: { post: Post }) {
         >
           {post.desc && post.desc.slice(0, 100)}...
         </CardItem>
+
         {post.img && (
           <CardItem translateZ="100" className="w-full mt-4">
             <Image

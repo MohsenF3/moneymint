@@ -1,18 +1,22 @@
 "use client";
 
 import { ThemeContext, ThemeContextType } from "@/app/context/ThemeContext";
-import React, { FormEvent, useContext } from "react";
+import React, { FormEvent, useContext, useEffect, useState } from "react";
 
 export default function ToggleTheme() {
   const { changeTheme } = useContext(ThemeContext) as ThemeContextType;
+  const [isDark, setIsDark] = useState(false);
 
-  const handelToggle = (e: FormEvent<HTMLInputElement>) => {
+  useEffect(() => {
+    const theme = localStorage.getItem("theme");
+    setIsDark(theme === "dark");
+  }, []);
+
+  const handleToggle = (e: FormEvent<HTMLInputElement>) => {
     const isChecked = e.currentTarget.checked;
-    if (isChecked) {
-      changeTheme("dark");
-    } else {
-      changeTheme("light");
-    }
+    const newTheme = isChecked ? "dark" : "light";
+    changeTheme(newTheme);
+    setIsDark(isChecked);
   };
 
   return (
@@ -20,8 +24,8 @@ export default function ToggleTheme() {
       <input
         type="checkbox"
         className="toggle theme-controller bg-base-content row-start-1 col-start-1 col-span-2"
-        onChange={handelToggle}
-        checked={localStorage.getItem("theme") === "dark" ? true : false}
+        onChange={handleToggle}
+        checked={isDark}
       />
 
       <svg

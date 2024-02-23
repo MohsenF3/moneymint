@@ -6,29 +6,40 @@ import React from "react";
 import { useFormState } from "react-dom";
 import CustomInput from "../CustomInput";
 import Button from "../Button";
+import { LoginFormProps } from "@/app/lib/defenition";
+import { usePathname } from "next/navigation";
 
-export default function LoginForm() {
+export default function LoginForm({ info }: { info: LoginFormProps }) {
+  const pathName = usePathname();
+  const isFa = pathName.startsWith("/fa/");
   const initialState = { message: null };
   const [state, dispatch] = useFormState(login, initialState);
 
   return (
-    <form className="card-body pt-0" action={dispatch}>
-      <CustomInput info="username" type="text" />
+    <form
+      className="card-body pt-0"
+      action={dispatch}
+      dir={isFa ? "rtl" : "ltr"}
+    >
+      <CustomInput holder={info.username} info="username" type="text" />
 
-      <CustomInput info="password" type="password" />
+      <CustomInput holder={info.password} info="password" type="password" />
 
       {state?.message ? (
         <p className="font-semibold text-red-500">{state.message}</p>
       ) : null}
 
       <div className="form-control mt-6 mb-5">
-        <Button type="login" />
+        <Button name={info.button} />
       </div>
 
       <span>
-        Don't have an account?
-        <Link href="/register" className="ml-1 link link-primary">
-          Sign up Here
+        {info.title}
+        <Link
+          href={`/${isFa ? "fa" : "en"}/register`}
+          className="ml-1 link link-primary"
+        >
+          {info.registerlink}
         </Link>
       </span>
     </form>

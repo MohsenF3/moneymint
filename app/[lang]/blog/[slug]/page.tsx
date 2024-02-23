@@ -26,20 +26,19 @@ export default async function SingleBlog({
   const post: Post = await getPost(params.slug);
 
   return (
-    <div className="lg:grid lg:grid-cols-3 flex flex-col gap-10 h-full py-5">
-      {post?.img && (
-        <div className="relative h-[40%] lg:h-full">
+    <div className="grid lg:grid-cols-3 grid-cols-1 gap-10 h-[80vh] ">
+      <div className="relative h-full w-full max-lg:col-span-2 max-md:row-span-2">
+        {post?.img && (
           <Image
             src={post.img}
-            alt="Shoes"
+            alt="BLog Image"
             fill
             className="object-cover rounded"
           />
-        </div>
-      )}
-
-      <div className="lg:col-span-2">
-        <h2 className="text-3xl capitalize mb-5">{post?.title}</h2>
+        )}
+      </div>
+      <div className="col-span-2">
+        <h2 className="md:text-3xl text-2xl capitalize mb-5">{post?.title}</h2>
         <div className="flex items-center gap-5 mb-10">
           {post && (
             <Suspense fallback={<PostUserSkeleton />}>

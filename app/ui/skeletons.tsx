@@ -40,7 +40,7 @@ export function BlogPostsSkeleton() {
 
 export function BlogCardSkeleton() {
   return (
-    <div className="lg:grid lg:grid-cols-3 flex flex-col gap-10 h-full py-5">
+    <div className="lg:grid lg:grid-cols-3 flex flex-col gap-10 h-[80vh] py-5">
       <div className="skeleton w-full h-[30%] lg:h-full"></div>
       <div className="lg:col-span-2 ">
         <div className="skeleton h-5 w-[30%] mb-5"></div>

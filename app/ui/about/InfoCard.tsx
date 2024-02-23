@@ -15,7 +15,7 @@ export default function InfoCard({ title, desc, Icon }: IInfoCardProps) {
       <div>
         <h3 className="text-lg font-bold sm:text-xl">{title}</h3>
       </div>
-      <p className="text-sm sm:text-base text-center md:text-left">{desc}</p>
+      <p className="text-sm sm:text-base ">{desc}</p>
     </div>
   );
 }

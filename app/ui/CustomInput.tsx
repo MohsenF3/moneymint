@@ -1,19 +1,22 @@
 import React from "react";
 import { CustomInputProps } from "../lib/defenition";
 
-export default function CustomInput({ type, info, errors }: CustomInputProps) {
+export default function CustomInput({
+  type,
+  info,
+  errors,
+  holder,
+}: CustomInputProps) {
   return (
     <div className="form-control">
       <label className="label" htmlFor={info}>
-        <span className="label-text capitalize ">
-          {info === "confirmpassword" ? "Confirm Password" : info} :
-        </span>
+        <span className="label-text capitalize ">{holder}</span>
       </label>
       <input
         id={info}
         type={type}
         name={info}
-        placeholder={info}
+        placeholder={holder}
         className="input input-bordered"
         aria-describedby={`${info}-error`}
       />

@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-export default function AboutTitle() {
+export default function AboutTitle({ title }: { title: string }) {
   return (
     <motion.h3
       initial={{ y: "-6rem", opacity: 0 }}
@@ -11,7 +11,7 @@ export default function AboutTitle() {
       transition={{ duration: 0.7 }}
       className="text-4xl md:text-5xl font-bold"
     >
-      No More Time Wasted!
+      {title}
     </motion.h3>
   );
 }
