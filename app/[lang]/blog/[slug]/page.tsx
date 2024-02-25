@@ -1,5 +1,5 @@
 import { getPost } from "@/app/lib/data";
-import { Post } from "@/app/lib/defenition";
+import { Post } from "@/app/lib/definition";
 import PostUser from "@/app/ui/blog/PostUser";
 import { PostUserSkeleton } from "@/app/ui/skeletons";
 import Image from "next/image";

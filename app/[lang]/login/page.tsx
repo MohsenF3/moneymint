@@ -41,7 +41,7 @@ export default async function Login({
             />
           </div>
 
-          <div className="divider">{LoginPage.devider}</div>
+          <div className="divider">{LoginPage.divider}</div>
 
           <LoginForm info={LoginPage.form} />
         </div>

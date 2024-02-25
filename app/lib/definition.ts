@@ -33,7 +33,7 @@ export type NavLinkProps = {
   id?: number;
   name: string;
   path: string;
-  handleMenue: () => void;
+  handleMenu: () => void;
 };
 
 export type Session = {
@@ -56,7 +56,7 @@ export type RegisterFormState = {
 };
 
 export type LoginFormState = {
-  message?: string | null;
+  message: string | null;
 };
 
 export type CustomInputProps = {

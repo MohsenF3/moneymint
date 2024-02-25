@@ -2,7 +2,7 @@ import { getPosts, getUser } from "@/app/lib/data";
 import Image from "next/image";
 import React from "react";
 import { deletePost } from "@/app/lib/actions";
-import { Post, User } from "@/app/lib/defenition";
+import { Post, User } from "@/app/lib/definition";
 import Link from "next/link";
 
 export default async function AllPosts() {

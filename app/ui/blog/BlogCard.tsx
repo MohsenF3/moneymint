@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import { CardBody, CardContainer, CardItem } from "./3d-card";
-import { Post } from "@/app/lib/defenition";
+import { Post } from "@/app/lib/definition";
 import Link from "next/link";
 
 export function BlogCard({ post }: { post: Post }) {

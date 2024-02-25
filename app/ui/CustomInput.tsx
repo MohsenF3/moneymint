@@ -1,5 +1,5 @@
 import React from "react";
-import { CustomInputProps } from "../lib/defenition";
+import { CustomInputProps } from "../lib/definition";
 
 export default function CustomInput({
   type,

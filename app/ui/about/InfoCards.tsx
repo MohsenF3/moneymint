@@ -2,7 +2,7 @@ import React from "react";
 import InfoCard from "./InfoCard";
 import { MdAlarmOff } from "react-icons/md";
 import { LuArrowDownNarrowWide, LuArrowUpNarrowWide } from "react-icons/lu";
-import { InfoCardData, InfoCardsProps } from "@/app/lib/defenition";
+import { InfoCardData, InfoCardsProps } from "@/app/lib/definition";
 
 export default function InfoCards({ info }: { info: InfoCardsProps }) {
   const infoCards: InfoCardData[] = [

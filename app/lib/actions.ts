@@ -6,7 +6,7 @@ import { revalidatePath } from "next/cache";
 import { signIn, signOut } from "@/auth";
 import { AuthError } from "next-auth";
 import bcrypt from "bcryptjs";
-import { LoginFormState, RegisterFormState } from "./defenition";
+import { LoginFormState, RegisterFormState } from "./definition";
 import { LoginFormSchema, RegisterFormSchema } from "./schema";
 
 export const addPost = async (formData: FormData) => {

@@ -79,26 +79,10 @@ export const authConfig = {
       return session;
     },
 
-    authorized({ auth, request: { nextUrl } }) {
-      const user = auth?.user;
-      const isOnLogin = nextUrl.pathname.startsWith("/login");
-      const isOnRegister = nextUrl.pathname.startsWith("/register");
-      const isOnBlog = nextUrl.pathname.startsWith("/blog");
-      const isOnAdmin = nextUrl.pathname.startsWith("/admin");
+    authorized({ auth }) {
+      const isAuthenticated = !!auth?.user;
 
-      if (isOnAdmin && !user?.isAdmin) {
-        return false;
-      }
-
-      if (isOnBlog && !user) {
-        return false;
-      }
-
-      if ((isOnLogin && user) || (isOnRegister && user)) {
-        return Response.redirect(new URL("/", nextUrl));
-      }
-
-      return true;
+      return isAuthenticated;
     },
   },
   providers: [], // Add providers with an empty array for now

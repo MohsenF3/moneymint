@@ -8,7 +8,7 @@ import CustomInput from "../CustomInput";
 import toast from "react-hot-toast";
 import Button from "../Button";
 import { usePathname } from "next/navigation";
-import { RegisterFormProps } from "@/app/lib/defenition";
+import { RegisterFormProps } from "@/app/lib/definition";
 
 export default function RegisterForm({ info }: { info: RegisterFormProps }) {
   const pathName = usePathname();

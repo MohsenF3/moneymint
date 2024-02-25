@@ -2,7 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import ContactForm from "./ContactForm";
-import { ContactSectionProps } from "@/app/lib/defenition";
+import { ContactSectionProps } from "@/app/lib/definition";
 
 export const ContactSection = ({ info }: { info: ContactSectionProps }) => {
   return (

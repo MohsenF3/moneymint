@@ -1,6 +1,6 @@
 import { deleteUser } from "@/app/lib/actions";
 import { getUsers } from "@/app/lib/data";
-import { User } from "@/app/lib/defenition";
+import { User } from "@/app/lib/definition";
 import Image from "next/image";
 import React from "react";
 

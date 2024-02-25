@@ -6,7 +6,7 @@ import React from "react";
 import { useFormState } from "react-dom";
 import CustomInput from "../CustomInput";
 import Button from "../Button";
-import { LoginFormProps } from "@/app/lib/defenition";
+import { LoginFormProps } from "@/app/lib/definition";
 import { usePathname } from "next/navigation";
 
 export default function LoginForm({ info }: { info: LoginFormProps }) {

@@ -40,7 +40,7 @@ export default function Links({
   const [isOpen, setIsOpen] = useState(true);
   const ref = useRef(null);
 
-  const handleMenue = () => {
+  const handleMenu = () => {
     setIsOpen(!isOpen);
   };
 
@@ -70,23 +70,23 @@ export default function Links({
           {/* close sidebar menu btn */}
           <button
             className="btn text-white light-white self-end lg:hidden"
-            onClick={handleMenue}
+            onClick={handleMenu}
           >
             <IoClose size={30} />
           </button>
 
-          {lang === "fa"
+          {lang === "fa" && window.innerWidth >= 1024
             ? links
                 .slice()
                 .reverse()
                 .map((link) => (
                   <li key={link.id}>
-                    <NavLink {...link} handleMenue={handleMenue} />
+                    <NavLink {...link} handleMenu={handleMenu} />
                   </li>
                 ))
             : links.map((link) => (
                 <li key={link.id}>
-                  <NavLink {...link} handleMenue={handleMenue} />
+                  <NavLink {...link} handleMenu={handleMenu} />
                 </li>
               ))}
 
@@ -97,7 +97,7 @@ export default function Links({
                   <NavLink
                     path={`/${lang}/admin`}
                     name={admin}
-                    handleMenue={handleMenue}
+                    handleMenu={handleMenu}
                   />
                 </li>
               ) : null}
@@ -107,7 +107,7 @@ export default function Links({
             <li>
               <Link
                 href={`/${lang}/login`}
-                onClick={handleMenue}
+                onClick={handleMenu}
                 className="btn btn-info text-white  ml-5"
               >
                 {login}
@@ -121,7 +121,7 @@ export default function Links({
 
       <button
         className="btn text-white light-white lg:hidden"
-        onClick={handleMenue}
+        onClick={handleMenu}
       >
         <AiOutlineMenu size={40} />
       </button>

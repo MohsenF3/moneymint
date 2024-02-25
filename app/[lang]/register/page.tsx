@@ -40,7 +40,7 @@ export default async function Register({
             />
           </div>
 
-          <div className="divider">{RegisterPage.devider}</div>
+          <div className="divider">{RegisterPage.divider}</div>
 
           <RegisterForm info={RegisterPage.form} />
         </div>

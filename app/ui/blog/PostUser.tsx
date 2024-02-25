@@ -1,5 +1,5 @@
 import { getUser } from "@/app/lib/data";
-import { User } from "@/app/lib/defenition";
+import { User } from "@/app/lib/definition";
 import Image from "next/image";
 
 export default async function PostUser({
