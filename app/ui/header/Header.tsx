@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Links from "./Links";
+import NavLinks from "./NavLinks";
 import { auth } from "@/auth";
 import ToggleTheme from "./ToggleTheme";
 import { Locale } from "@/i18n.config";
@@ -24,7 +24,7 @@ export default async function Header({ lang }: { lang: Locale }) {
       </div>
 
       <div className="flex items-center">
-        <Links session={session} navigation={Navigation} lang={lang} />
+        <NavLinks session={session} navigation={Navigation} lang={lang} />
         <ToggleTheme />
       </div>
     </header>

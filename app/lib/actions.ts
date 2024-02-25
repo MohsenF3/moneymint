@@ -145,9 +145,11 @@ export const login = async (preState: LoginFormState, formData: FormData) => {
     Object.fromEntries(formData)
   );
 
+  console.log("this is state in LoginForm ", validatedFields);
+
   if (!validatedFields.success) {
     return {
-      message: "Missing Fields. Please fill out all fields.",
+      message: "Please fill out all fields.",
     };
   }
 

@@ -9,18 +9,10 @@ import { handleLogout } from "@/app/lib/actions";
 import { Session } from "next-auth";
 import { useOnClickOutside } from "@/app/lib/hooks";
 import { Locale } from "@/i18n.config";
+import { NavigationType } from "@/app/lib/definition";
+import { IconType } from "react-icons";
 
-interface NavigationType {
-  home: string;
-  about: string;
-  contact: string;
-  blog: string;
-  admin: string;
-  login: string;
-  logout: string;
-}
-
-export default function Links({
+export default function NavLinks({
   session,
   navigation,
   lang,
@@ -40,13 +32,9 @@ export default function Links({
   const [isOpen, setIsOpen] = useState(true);
   const ref = useRef(null);
 
-  const handleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+  const handleMenu = () => setIsOpen(!isOpen);
 
-  const onClose = () => {
-    setIsOpen(true);
-  };
+  const onClose = () => setIsOpen(true);
 
   useOnClickOutside(ref, onClose);
 
@@ -68,12 +56,11 @@ export default function Links({
       >
         <ul className="max-lg:self-start w-full flex flex-col lg:flex-row lg:items-center max-lg:p-5 lg:gap-2 gap-6">
           {/* close sidebar menu btn */}
-          <button
-            className="btn text-white light-white self-end lg:hidden"
-            onClick={handleMenu}
-          >
-            <IoClose size={30} />
-          </button>
+          <ToggleSidebarBtn
+            handleMenu={handleMenu}
+            Icon={IoClose}
+            style="self-end"
+          />
 
           {lang === "fa" && window.innerWidth >= 1024
             ? links
@@ -119,12 +106,7 @@ export default function Links({
 
       {/* open sidebar menu btn */}
 
-      <button
-        className="btn text-white light-white lg:hidden"
-        onClick={handleMenu}
-      >
-        <AiOutlineMenu size={40} />
-      </button>
+      <ToggleSidebarBtn handleMenu={handleMenu} Icon={AiOutlineMenu} />
     </div>
   );
 }
@@ -136,5 +118,24 @@ function LogoutBtn({ logout }: { logout: string }) {
         {logout}
       </button>
     </form>
+  );
+}
+
+function ToggleSidebarBtn({
+  Icon,
+  style,
+  handleMenu,
+}: {
+  Icon: IconType;
+  style?: string;
+  handleMenu: () => void;
+}) {
+  return (
+    <button
+      className={`btn text-white light-white  lg:hidden ${style}`}
+      onClick={handleMenu}
+    >
+      <Icon size={30} />
+    </button>
   );
 }

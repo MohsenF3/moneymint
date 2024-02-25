@@ -114,3 +114,13 @@ export type RegisterFormProps = {
   title: string;
   loginlink: string;
 };
+
+export type NavigationType = {
+  home: string;
+  about: string;
+  contact: string;
+  blog: string;
+  admin: string;
+  login: string;
+  logout: string;
+};

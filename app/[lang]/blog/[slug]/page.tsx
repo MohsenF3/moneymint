@@ -3,6 +3,7 @@ import { Post } from "@/app/lib/definition";
 import PostUser from "@/app/ui/blog/PostUser";
 import { PostUserSkeleton } from "@/app/ui/skeletons";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 import React, { Suspense } from "react";
 
 export const generateMetadata = async ({
@@ -24,6 +25,10 @@ export default async function SingleBlog({
   params: { slug: string };
 }) {
   const post: Post = await getPost(params.slug);
+
+  if (!post) {
+    return notFound();
+  }
 
   return (
     <div className="grid lg:grid-cols-3 grid-cols-1 gap-10 h-[80vh] ">
