@@ -5,36 +5,15 @@ import Link from "next/link";
 import React from "react";
 import { useFormState } from "react-dom";
 import CustomInput from "../CustomInput";
-import toast from "react-hot-toast";
 import Button from "../Button";
 import { usePathname } from "next/navigation";
-import { RegisterFormProps } from "@/app/lib/definition";
+import { RegisterFormProps, RegisterFormState } from "@/app/lib/definition";
 
 export default function RegisterForm({ info }: { info: RegisterFormProps }) {
   const pathName = usePathname();
   const isFa = pathName.startsWith("/fa/");
-  const initialState = { message: null, errors: {} };
+  const initialState: RegisterFormState = { message: null, errors: {} };
   const [state, dispatch] = useFormState(register, initialState);
-
-  if (!state?.errors && !state?.message) {
-    toast.success("Welcome to Moneymint", {
-      style: {
-        borderRadius: "10px",
-        background: "#333",
-        color: "#fff",
-      },
-    });
-  }
-
-  if (state?.message && !state.errors) {
-    toast.error(state.message, {
-      style: {
-        borderRadius: "10px",
-        background: "#333",
-        color: "#fff",
-      },
-    });
-  }
 
   return (
     <form
