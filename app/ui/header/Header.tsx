@@ -5,6 +5,7 @@ import ToggleTheme from "./ToggleTheme";
 import { Locale } from "@/i18n.config";
 import { getDictionary } from "@/app/lib/dictionary";
 import LangSwitcher from "./LangSwitcher";
+import img from "../../../public/icon.svg";
 
 export default async function Header({ lang }: { lang: Locale }) {
   const session = await auth();
@@ -13,13 +14,7 @@ export default async function Header({ lang }: { lang: Locale }) {
   return (
     <header className="w-full flex items-center justify-between z-20 ">
       <div className="flex items-center gap-5">
-        <Image
-          src="/icon.svg"
-          alt="logo"
-          width={200}
-          height={50}
-          className="logo"
-        />
+        <Image src={img} alt="logo" width={200} height={50} className="logo" />
         <LangSwitcher />
       </div>
 
