@@ -12,9 +12,7 @@ import { usePathname } from "next/navigation";
 export default function LoginForm({ info }: { info: LoginFormProps }) {
   const pathName = usePathname();
   const isFa = pathName.startsWith("/fa/");
-  const initialState = { message: null };
-  const [state, dispatch] = useFormState(login, initialState);
-
+  const [errorMessage, dispatch] = useFormState(login, undefined);
 
   return (
     <form
@@ -26,9 +24,9 @@ export default function LoginForm({ info }: { info: LoginFormProps }) {
 
       <CustomInput holder={info.password} info="password" type="password" />
 
-      {state?.message ? (
-        <p className="font-semibold text-red-500">{state.message}</p>
-      ) : null}
+      {errorMessage && (
+        <p className="font-semibold text-red-500">{errorMessage}</p>
+      )}
 
       <div className="form-control mt-6 mb-5">
         <Button name={info.button} />

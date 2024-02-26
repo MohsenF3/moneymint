@@ -19,7 +19,7 @@ export default async function AllPosts() {
             : null;
 
           return (
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between" key={post._id}>
               <Link
                 href={`/blog/${post.slug}`}
                 key={post._id}

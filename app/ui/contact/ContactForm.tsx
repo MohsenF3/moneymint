@@ -93,7 +93,9 @@ export default function ContactForm({ info }: { info: ContactFormProps }) {
         value={data.message}
         onChange={(e) => setData({ ...data, message: e.target.value })}
       />
-      <button className="btn btn-primary w-full">{info.button}</button>
+      <button className="btn btn-primary text-white w-full">
+        {info.button}
+      </button>
     </form>
   );
 }

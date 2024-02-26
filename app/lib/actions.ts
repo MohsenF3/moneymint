@@ -6,7 +6,6 @@ import { revalidatePath } from "next/cache";
 import { signIn, signOut } from "@/auth";
 import { AuthError } from "next-auth";
 import bcrypt from "bcryptjs";
-import { LoginFormState, RegisterFormState } from "./definition";
 import { LoginFormSchema, RegisterFormSchema } from "./schema";
 
 export const addPost = async (formData: FormData) => {
@@ -91,10 +90,7 @@ export const handleLogout = async () => {
   await signOut();
 };
 
-export const register = async (
-  preState: RegisterFormState,
-  formData: FormData
-) => {
+export const register = async (preState: any, formData: FormData) => {
   const validatedFields = RegisterFormSchema.safeParse(
     Object.fromEntries(formData)
   );
@@ -140,17 +136,16 @@ export const register = async (
   }
 };
 
-export const login = async (preState: LoginFormState, formData: FormData) => {
+export const login = async (
+  prevState: string | undefined,
+  formData: FormData
+) => {
   const validatedFields = LoginFormSchema.safeParse(
     Object.fromEntries(formData)
   );
 
-  console.log("this is state in LoginForm ", validatedFields);
-
   if (!validatedFields.success) {
-    return {
-      message: "Please fill out all fields.",
-    };
+    return "Please fill out all fields.";
   }
 
   const { username, password } = validatedFields.data;
@@ -159,17 +154,15 @@ export const login = async (preState: LoginFormState, formData: FormData) => {
     await signIn("credentials", { username, password });
   } catch (error) {
     if (error instanceof AuthError) {
-      switch (error.type) {
-        case "CredentialsSignin":
-          return {
-            message: "Invalid credentials",
-          };
-        default:
-          return {
-            message: "Something went wrong",
-          };
+      if (error instanceof AuthError) {
+        switch (error.type) {
+          case "CredentialsSignin":
+            return "Invalid credentials.";
+          default:
+            return "Something went wrong.";
+        }
       }
+      throw error;
     }
-    throw error;
   }
 };
