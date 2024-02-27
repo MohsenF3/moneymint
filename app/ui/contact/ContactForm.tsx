@@ -6,10 +6,10 @@ import React, { FormEvent, useState } from "react";
 import toast from "react-hot-toast";
 
 type Data = {
-  name?: string;
-  email?: string;
-  number?: string;
-  message?: string;
+  name: string;
+  email: string;
+  number: string;
+  message: string;
 };
 
 export default function ContactForm({ info }: { info: ContactFormProps }) {
@@ -24,10 +24,12 @@ export default function ContactForm({ info }: { info: ContactFormProps }) {
   });
   const [loading, setLoading] = useState(false);
 
-  if (loading) return toast.loading("Sending Message...");
+  if (loading) {
+    toast.loading("Sending Message...");
+  }
 
-  const sendEmail = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     if (!data.name) {
       return toast.error("Please enter your name");
     }
@@ -37,29 +39,33 @@ export default function ContactForm({ info }: { info: ContactFormProps }) {
     if (!data.message) {
       return toast.error("Please enter a message");
     }
-
     setLoading(true);
-    const response = await fetch("/api/send", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-
-    if (response.status === 200) {
-      setData({});
+    try {
+      await fetch("/api/contact", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      toast.success(`Hey ${data.name}, your message was sent successfully!`);
+    } catch (error) {
+      toast.error(`Dear ${data.name}, something went wrong.`);
+    } finally {
       setLoading(false);
-      toast.success(
-        `Hey ${data.name}, your message was sent successfully! Check your inbox!`
-      );
+      setData({
+        name: "",
+        email: "",
+        number: "",
+        message: "",
+      });
     }
   };
 
   return (
     <form
+      onSubmit={handleSubmit}
       className="flex-1  max-w-xl"
-      onSubmit={sendEmail}
       dir={isFaLang ? "rtl" : "ltr"}
     >
       <input
@@ -93,8 +99,12 @@ export default function ContactForm({ info }: { info: ContactFormProps }) {
         value={data.message}
         onChange={(e) => setData({ ...data, message: e.target.value })}
       />
-      <button className="btn btn-primary text-white w-full">
-        {info.button}
+      <button disabled={loading} className="btn btn-primary text-white w-full">
+        {loading ? (
+          <span className="loading loading-spinner loading-md"></span>
+        ) : (
+          info.button
+        )}
       </button>
     </form>
   );

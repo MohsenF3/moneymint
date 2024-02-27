@@ -44,7 +44,7 @@ export default function LangSwitcher({ lang }: { lang: string }) {
   return (
     <div className="relative">
       <button className="flex items-center gap-2" onClick={toggleBox}>
-        <span>{lang ? "Fa" : "En"}</span>
+        <span className="capitalize">{lang}</span>
         <FaAngleDown />
       </button>
       <div
