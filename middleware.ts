@@ -17,47 +17,41 @@ function getLocale(request: NextRequest): string | undefined {
   const languages = new Negotiator({ headers: negotiatorHeaders }).languages();
 
   const locale = matchLocale(languages, locales, i18n.defaultLocale);
-
   return locale;
 }
 
-export default auth((req) => {
-  const { nextUrl, auth } = req;
+export default auth((request) => {
+  const { nextUrl, auth } = request;
   const pathname = nextUrl.pathname;
-  const segments = pathname.split("/")[1];
+
   const pathnameIsMissingLocale = i18n.locales.every(
     (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
   );
+
   // Redirect if there is no locale
   if (pathnameIsMissingLocale) {
-    const locale = getLocale(req);
+    const locale = getLocale(request);
+
+    if (locale === i18n.defaultLocale) {
+      return NextResponse.rewrite(
+        new URL(
+          `/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}`,
+          request.url
+        )
+      );
+    }
+
     return NextResponse.redirect(
       new URL(
         `/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}`,
-        req.url
+        request.url
       )
     );
   }
 
   // auth
 
-  const user = auth?.user;
-  const isOnLogin = pathname.startsWith(`/${segments}/login`);
-  const isOnRegister = pathname.startsWith(`/${segments}/register`);
-  const isOnBlog = pathname.startsWith(`/${segments}/blog`);
-  const isOnAdmin = pathname.startsWith(`/${segments}/admin`);
-
-  if (isOnAdmin && !user?.isAdmin) {
-    return Response.redirect(new URL(`/${segments}`, nextUrl));
-  }
-
-  if (isOnBlog && !user) {
-    return Response.redirect(new URL(`/${segments}/login`, nextUrl));
-  }
-
-  if ((isOnLogin && user) || (isOnRegister && user)) {
-    return Response.redirect(new URL(`/${segments}`, nextUrl));
-  }
+  authConfig.callbacks.authorized({ auth, request });
 });
 
 export const config = {

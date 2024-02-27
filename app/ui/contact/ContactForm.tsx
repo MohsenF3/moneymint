@@ -14,7 +14,7 @@ type Data = {
 
 export default function ContactForm({ info }: { info: ContactFormProps }) {
   const pathName = usePathname();
-  const isFa = pathName.startsWith("/fa/");
+  const isFaLang = pathName.split("/")[1] === "fa";
 
   const [data, setData] = useState<Data>({
     name: "",
@@ -60,7 +60,7 @@ export default function ContactForm({ info }: { info: ContactFormProps }) {
     <form
       className="flex-1  max-w-xl"
       onSubmit={sendEmail}
-      dir={isFa ? "rtl" : "ltr"}
+      dir={isFaLang ? "rtl" : "ltr"}
     >
       <input
         type="text"

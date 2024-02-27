@@ -1,17 +1,20 @@
 "use client";
 
 import { register } from "@/app/lib/actions";
-import Link from "next/link";
 import React from "react";
 import { useFormState } from "react-dom";
 import CustomInput from "../CustomInput";
 import Button from "../Button";
-import { usePathname } from "next/navigation";
 import { RegisterFormProps, RegisterFormState } from "@/app/lib/definition";
+import CustomLink from "../header/CustomLink";
 
-export default function RegisterForm({ info }: { info: RegisterFormProps }) {
-  const pathName = usePathname();
-  const isFa = pathName.startsWith("/fa/");
+export default function RegisterForm({
+  info,
+  lang,
+}: {
+  info: RegisterFormProps;
+  lang: string;
+}) {
   const initialState: RegisterFormState = { message: null, errors: {} };
   const [state, dispatch] = useFormState(register, initialState);
 
@@ -19,7 +22,7 @@ export default function RegisterForm({ info }: { info: RegisterFormProps }) {
     <form
       className="card-body pt-0"
       action={dispatch}
-      dir={isFa ? "rtl" : "ltr"}
+      dir={lang === "fa" ? "rtl" : "ltr"}
     >
       <CustomInput
         holder={info.username}
@@ -52,12 +55,14 @@ export default function RegisterForm({ info }: { info: RegisterFormProps }) {
 
       <span>
         {info.title}
-        <Link
-          href={`/${isFa ? "fa" : "en"}/login`}
+
+        <CustomLink
+          href="/login"
+          lang={lang}
           className="ml-1 link link-primary"
         >
           {info.loginlink}
-        </Link>
+        </CustomLink>
       </span>
     </form>
   );

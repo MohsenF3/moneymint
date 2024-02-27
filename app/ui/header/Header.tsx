@@ -15,7 +15,7 @@ export default async function Header({ lang }: { lang: Locale }) {
     <header className="w-full flex items-center justify-between z-20 ">
       <div className="flex items-center gap-5">
         <Image src={img} alt="logo" width={200} height={50} className="logo" />
-        <LangSwitcher />
+        <LangSwitcher lang={lang} />
       </div>
 
       <div className="flex items-center">

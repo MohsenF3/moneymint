@@ -32,6 +32,7 @@ export type CreatePostInitialState = {
 export type NavLinkProps = {
   id?: number;
   name: string;
+  lang: string;
   path: string;
   handleMenu: () => void;
 };

@@ -2,8 +2,8 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import Link from "next/link";
 import { Locale } from "@/i18n.config";
+import CustomLink from "../header/CustomLink";
 
 export default function HomeLinks({
   buttons,
@@ -19,12 +19,12 @@ export default function HomeLinks({
       transition={{ delay: 5.2 }}
       className="z-10"
     >
-      <Link href={`/${lang}/about`} className="btn btn-accent mr-3">
+      <CustomLink href="/about" lang={lang} className="btn btn-accent mr-3">
         {buttons.aboutBtn}
-      </Link>
-      <Link href={`/${lang}/contact`} className="btn btn-outline">
+      </CustomLink>
+      <CustomLink href="/contact" lang={lang} className="btn btn-outline">
         {buttons.contactBtn}
-      </Link>
+      </CustomLink>
     </motion.div>
   );
 }

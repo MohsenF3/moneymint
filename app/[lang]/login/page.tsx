@@ -43,7 +43,7 @@ export default async function Login({
 
           <div className="divider">{LoginPage.divider}</div>
 
-          <LoginForm info={LoginPage.form} />
+          <LoginForm info={LoginPage.form} lang={lang} />
         </div>
       </div>
     </div>

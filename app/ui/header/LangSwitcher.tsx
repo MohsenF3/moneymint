@@ -5,17 +5,37 @@ import { usePathname } from "next/navigation";
 import { FaAngleDown } from "react-icons/fa";
 
 import { useState } from "react";
+import { i18n } from "@/i18n.config";
 
-export default function LangSwitcher() {
+export default function LangSwitcher({ lang }: { lang: string }) {
   const [openBox, setOpenBox] = useState(false);
   const pathName = usePathname();
-  const isFa = pathName.startsWith("/fa");
 
   const redirectedPathName = (locale: string) => {
     if (!pathName) return "/";
-    const segments = pathName.split("/");
-    segments[1] = locale;
-    return segments.join("/");
+
+    const pathnameIsMissingLocale = i18n.locales.every(
+      (locale) =>
+        !pathName.startsWith(`/${locale}/`) && pathName !== `/${locale}`
+    );
+
+    if (pathnameIsMissingLocale) {
+      if (locale === i18n.defaultLocale) return pathName;
+      return `/${locale}${pathName}`;
+    } else {
+      if (locale === i18n.defaultLocale) {
+        const segments = pathName.split("/");
+        const isHome = segments.length === 2;
+        if (isHome) return "/";
+
+        segments.splice(1, 1);
+        return segments.join("/");
+      }
+
+      const segments = pathName.split("/");
+      segments[1] = locale;
+      return segments.join("/");
+    }
   };
 
   const toggleBox = () => setOpenBox(!openBox);
@@ -24,7 +44,7 @@ export default function LangSwitcher() {
   return (
     <div className="relative">
       <button className="flex items-center gap-2" onClick={toggleBox}>
-        <span>{isFa ? "Fa" : "En"}</span>
+        <span>{lang ? "Fa" : "En"}</span>
         <FaAngleDown />
       </button>
       <div
