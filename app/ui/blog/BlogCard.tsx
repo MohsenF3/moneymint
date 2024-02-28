@@ -1,28 +1,27 @@
-"use client";
-
 import Image from "next/image";
 import React from "react";
 import { CardBody, CardContainer, CardItem } from "./3d-card";
-import { Post } from "@/app/lib/defenition";
+import { Post } from "@/app/lib/definition";
 import Link from "next/link";
 
 export function BlogCard({ post }: { post: Post }) {
   return (
     <CardContainer className="inter-var relative w-full h-full">
-      <CardBody className=" relative group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-transparent dark:border-white/[0.2] border-black/[0.1] w-full h-[31rem] rounded-xl p-6 border  ">
+      <CardBody className=" relative group/card  hover:shadow-2xl hover:shadow-accent bg-base-100 border-primary/[0.2] w-full h-[31rem] rounded-xl p-6 border  ">
         <CardItem
           translateZ="50"
-          className="text-xl font-bold text-neutral-600 dark:text-white"
+          className="text-xl font-bold text-white light-white"
         >
           {post.title}
         </CardItem>
         <CardItem
           as="p"
           translateZ="60"
-          className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
+          className="text-sm max-w-sm mt-2 text-neutral-300"
         >
           {post.desc && post.desc.slice(0, 100)}...
         </CardItem>
+
         {post.img && (
           <CardItem translateZ="100" className="w-full mt-4">
             <Image
@@ -36,7 +35,7 @@ export function BlogCard({ post }: { post: Post }) {
         )}
         <Link
           href={`/blog/${post.slug}`}
-          className="absolute bottom-0 m-5  right-0 px-4 py-2 rounded-xl bg-black dark:bg-white dark:text-black text-white text-xs font-bold"
+          className="absolute bottom-0 m-5 right-0 px-4 py-2 rounded-xl bg-success text-white text-xs font-bold"
         >
           Read More
         </Link>

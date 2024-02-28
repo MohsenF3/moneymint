@@ -2,8 +2,9 @@ import { getPosts, getUser } from "@/app/lib/data";
 import Image from "next/image";
 import React from "react";
 import { deletePost } from "@/app/lib/actions";
-import { Post, User } from "@/app/lib/defenition";
+import { Post, User } from "@/app/lib/definition";
 import Link from "next/link";
+import img from "../../../public/default-user.svg";
 
 export default async function AllPosts() {
   const posts: Post[] = await getPosts();
@@ -18,7 +19,7 @@ export default async function AllPosts() {
             : null;
 
           return (
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between" key={post._id}>
               <Link
                 href={`/blog/${post.slug}`}
                 key={post._id}
@@ -28,7 +29,7 @@ export default async function AllPosts() {
                   <div className="avatar">
                     <div className="w-16 rounded-full">
                       <Image
-                        src={post.img ? post.img : "/default-user.svg"}
+                        src={post.img ? post.img : img}
                         alt="Shoes"
                         width={70}
                         height={70}

@@ -1,7 +1,7 @@
 import React from "react";
 import { BlogCard } from "./BlogCard";
 import { fetchFilteredPosts } from "@/app/lib/data";
-import { Post } from "@/app/lib/defenition";
+import { Post } from "@/app/lib/definition";
 
 export default async function Posts({
   query,

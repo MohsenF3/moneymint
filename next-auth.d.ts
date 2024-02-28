@@ -1,6 +1,6 @@
 import NextAuth, { DefaultSession } from "next-auth";
 import { JWT } from "next-auth/jwt";
-import { User as UserType } from "./app/lib/defenition";
+import { User as UserType } from "./app/lib/definition";
 
 declare module "next-auth" {
   interface User {

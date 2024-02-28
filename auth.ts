@@ -3,8 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import { authConfig } from "./auth.config";
-import { z } from "zod";
-import { User as UserType } from "./app/lib/defenition";
+import { User as UserType } from "./app/lib/definition";
 import { User } from "./app/lib/models";
 import bcrypt from "bcrypt";
 import { connectToDb } from "./app/lib/utils";
@@ -57,4 +56,70 @@ export const {
       },
     }),
   ],
+  callbacks: {
+    async signIn({ account, profile }) {
+      if (account?.provider === "google") {
+        connectToDb();
+        try {
+          const user = await User.findOne({ email: profile?.email });
+          if (!user) {
+            const newUser = new User({
+              username: profile?.name,
+              email: profile?.email,
+              img: profile?.picture,
+            });
+            await newUser.save();
+          }
+        } catch (error) {
+          console.log(
+            "this is error from auth.config.ts in signIn callback for google",
+            error
+          );
+          return false;
+        }
+      }
+
+      if (account?.provider === "github") {
+        connectToDb();
+        try {
+          const user = await User.findOne({ email: profile?.email });
+
+          if (!user) {
+            const newUser = new User({
+              username: profile?.login,
+              email: profile?.email,
+              img: profile?.avatar_url,
+            });
+
+            await newUser.save();
+          }
+        } catch (error) {
+          console.log(
+            "this is error from auth.config.ts in signIn callback for github",
+            error
+          );
+          return false;
+        }
+      }
+      return true;
+    },
+    async jwt({ token, user, account, profile }) {
+      if (user && account?.provider !== "credentials") {
+        connectToDb();
+        const userFromdb = await User.findOne({ email: profile?.email });
+        token.isAdmin = userFromdb.isAdmin;
+        token.id = userFromdb.id;
+      }
+
+      if (user && account?.provider === "credentials") {
+        token.name = user._doc?.username;
+        token.email = user._doc?.email;
+        token.isAdmin = user._doc?.isAdmin;
+        token.id = user.id;
+      }
+
+      return token;
+    },
+    ...authConfig.callbacks,
+  },
 });

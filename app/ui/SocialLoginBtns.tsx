@@ -1,6 +1,5 @@
 import { FaGithub, FaGoogle } from "react-icons/fa";
 
-
 type SocialLoginBtnsProps = {
   name: string;
   icon: string;

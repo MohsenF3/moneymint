@@ -1,35 +1,49 @@
 "use client";
 
 import { login } from "@/app/lib/actions";
-import Link from "next/link";
 import React from "react";
 import { useFormState } from "react-dom";
 import CustomInput from "../CustomInput";
 import Button from "../Button";
+import { LoginFormProps } from "@/app/lib/definition";
+import CustomLink from "../header/CustomLink";
 
-export default function LoginForm() {
-  const initialState = { message: null };
-  const [state, dispatch] = useFormState(login, initialState);
+export default function LoginForm({
+  info,
+  lang,
+}: {
+  info: LoginFormProps;
+  lang: string;
+}) {
+  const [errorMessage, dispatch] = useFormState(login, undefined);
 
   return (
-    <form className="card-body pt-0" action={dispatch}>
-      <CustomInput info="username" type="text" />
+    <form
+      className="card-body pt-0"
+      action={dispatch}
+      dir={lang === "fa" ? "rtl" : "ltr"}
+    >
+      <CustomInput holder={info.username} info="username" type="text" />
 
-      <CustomInput info="password" type="password" />
+      <CustomInput holder={info.password} info="password" type="password" />
 
-      {state?.message ? (
-        <p className="font-semibold text-red-500">{state.message}</p>
-      ) : null}
+      {errorMessage && (
+        <p className="font-semibold text-red-500">{errorMessage}</p>
+      )}
 
       <div className="form-control mt-6 mb-5">
-        <Button type="login" />
+        <Button name={info.button} />
       </div>
 
       <span>
-        Don't have an account?
-        <Link href="/register" className="ml-1 link link-primary">
-          Sign up Here
-        </Link>
+        {info.title}
+        <CustomLink
+          href="/register"
+          lang={lang}
+          className="ml-1 link link-primary"
+        >
+          {info.registerlink}
+        </CustomLink>
       </span>
     </form>
   );

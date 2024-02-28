@@ -1,8 +1,9 @@
 import { deleteUser } from "@/app/lib/actions";
 import { getUsers } from "@/app/lib/data";
-import { User } from "@/app/lib/defenition";
+import { User } from "@/app/lib/definition";
 import Image from "next/image";
 import React from "react";
+import img from "../../../public/default-user.svg";
 
 export default async function AllUsers() {
   const users: User[] = await getUsers();
@@ -20,7 +21,7 @@ export default async function AllUsers() {
               <div className="avatar">
                 <div className="w-16 rounded-full">
                   <Image
-                    src={user.img ? user.img : "/default-user.svg"}
+                    src={user.img ? user.img : img}
                     alt="Shoes"
                     width={70}
                     height={70}

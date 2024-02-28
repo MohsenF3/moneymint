@@ -1,0 +1,95 @@
+{
+  "Navigation": {
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+    "blog": "Blog",
+    "admin": "Admin",
+    "login": "Login",
+    "logout": "Logout"
+  },
+  "IndexPage": {
+    "title": "Welcome To Moneymint Where You Can Unlock Your Earning Potential",
+    "buttons": {
+      "aboutBtn": "About Us",
+      "contactBtn": "Contact"
+    }
+  },
+  "AboutPage": {
+    "title": "No More Time Wasted!",
+    "infoCards": {
+      "item1": {
+        "title": "Increased Sales",
+        "description": " Insightful's predictive analytics identify high-value prospects for targeted pitches, boosting conversion rates and sales by up to 20%."
+      },
+      "item2": {
+        "title": "No Time Wasted",
+        "description": "Insightful automates personalized content creation, freeing up sales reps' time for revenue-focused activities and increased productivity."
+      },
+      "item3": {
+        "title": "Decreased Churn",
+        "description": " Insightful's AI lead engagement and renewal tools reduce customer churn by up to 30% through consistent outreach and retention opportunities."
+      }
+    }
+  },
+  "ContactPage": {
+    "title": "Get in Touch <br /> Contact Us for More Information:",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "number": "Number(Optional)",
+      "message": "Message",
+      "button": "Send"
+    }
+  },
+  "BlogPage": {
+    "search": "Search...",
+    "link": "Read More"
+  },
+  "SingleBlogPage": {
+    "author": "Author",
+    "published": "Published"
+  },
+  "LoginPage": {
+    "title": "Login now!",
+    "description": "Welcome to our login page! Here, you can securely access your account.Join our community today by logging in and unlocking the full potential of our platform. We're excited to have you on board!",
+    "github": "GitHub",
+    "google": "Google",
+    "divider": "OR",
+    "form": {
+      "username": "username",
+      "password": "password",
+      "button": "Login",
+      "title": "Don't have an account?",
+      "registerlink": "Sign up Here"
+    }
+  },
+  "RegisterPage": {
+    "title": "Sign Up now!",
+    "description": "Welcome to our Sign Up page! Here, you can securely access your account.Sign Up our community today by Signing Up in and unlocking the full potential of our platform. We're excited to have you on board!",
+    "github": "GitHub",
+    "google": "Google",
+    "divider": "OR",
+    "form": {
+      "username": "username",
+      "email": "email",
+      "password": "password",
+      "confirmpassword": "Confirm Password",
+      "button": "Sign Up",
+      "title": "Already have an account?",
+      "loginlink": "Login here"
+    }
+  },
+  "NotFoundPage": {
+    "title": "Opps ! Page not found;",
+    "button": "Back Home"
+  },
+  "ErrorPage": {
+    "title": "Something went wrong!",
+    "button": "Try again"
+  },
+  "Footer": {
+    "title": "MoneyMint",
+    "copyright": "MoneyMint © All rights reserved."
+  }
+}

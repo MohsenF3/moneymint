@@ -19,6 +19,8 @@ export const RegisterFormSchema = z
   });
 
 export const LoginFormSchema = z.object({
-  username: z.string(),
-  password: z.string(),
+  username: z.string().min(1, { message: "username is required" }),
+  password: z
+    .string()
+    .min(6, { message: "Password must be atleast 6 characters" }),
 });
