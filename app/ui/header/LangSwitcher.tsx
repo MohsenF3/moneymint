@@ -45,7 +45,9 @@ export default function LangSwitcher({ lang }: { lang: string }) {
     <div className="relative">
       <button className="flex items-center gap-2" onClick={toggleBox}>
         <span className="capitalize">{lang}</span>
-        <FaAngleDown />
+        <span className={`${openBox ? "rotate-180" : ""} duration-200`}>
+          <FaAngleDown />
+        </span>
       </button>
       <div
         className={`absolute right-0 w-16 bg-base-100 shadow-xl ${

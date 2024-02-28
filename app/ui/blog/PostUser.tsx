@@ -19,7 +19,7 @@ export default async function PostUser({
           <div className="relative w-16 h-16">
             <Image
               src={user.img ? user.img : img}
-              alt="logo"
+              alt="User"
               fill
               className="rounded-full object-cover"
             />

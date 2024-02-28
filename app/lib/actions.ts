@@ -160,7 +160,7 @@ export const login = async (
         default:
           return "Something went wrong.";
       }
-      throw error;
     }
+    throw error;
   }
 };

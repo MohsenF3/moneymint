@@ -20,7 +20,9 @@ export const authConfig = {
 
       const isOnLogin = nextUrl.pathname.startsWith(`${path}login`);
       const isOnRegister = nextUrl.pathname.startsWith(`${path}register`);
-      const isOnBlog = nextUrl.pathname.startsWith(`${path}blog`);
+      const isOnBlog =
+        nextUrl.pathname.startsWith(`${path}blog`) ||
+        nextUrl.pathname.startsWith("/en/blog");
       const isOnAdmin = nextUrl.pathname.startsWith(`${path}admin`);
 
       if (isOnAdmin && !user?.isAdmin) {
