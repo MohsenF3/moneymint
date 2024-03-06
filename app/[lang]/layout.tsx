@@ -7,6 +7,7 @@ import { ThemeProvider } from "../context/ThemeContext";
 import ClientThemeWrapper from "../context/ClientThemeWrapper";
 import Header from "../ui/header/Header";
 import { Locale, i18n } from "@/i18n.config";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata: Metadata = {
   title: {
