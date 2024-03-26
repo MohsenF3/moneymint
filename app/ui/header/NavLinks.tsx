@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import NavLink from "./NavLink";
 import { IoClose } from "react-icons/io5";
 import { AiOutlineMenu } from "react-icons/ai";
@@ -29,6 +29,7 @@ export default function NavLinks({
   ];
 
   const [isOpen, setIsOpen] = useState(true);
+  const [windowWidth, setWindowWidth] = useState(0);
   const ref = useRef(null);
 
   const handleMenu = () => setIsOpen(!isOpen);
@@ -36,6 +37,10 @@ export default function NavLinks({
   const onClose = () => setIsOpen(true);
 
   useOnClickOutside(ref, onClose);
+
+  useEffect(() => {
+    setWindowWidth(window.innerWidth);
+  }, []);
 
   return (
     <>
@@ -55,7 +60,7 @@ export default function NavLinks({
             style="self-end"
           />
 
-          {lang === "fa" && window.innerWidth >= 1024
+          {lang === "fa" && windowWidth >= 1024
             ? links
                 .slice()
                 .reverse()

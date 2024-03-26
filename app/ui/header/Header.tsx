@@ -13,14 +13,15 @@ export default async function Header({ lang }: { lang: Locale }) {
   return (
     <header className="w-full flex items-center justify-between z-20 ">
       <div className="flex items-center gap-5">
-        <Image
-          src="/icon.svg"
-          alt="logo"
-          width={200}
-          height={50}
-          className="logo"
-          priority
-        />
+        <div className="relative sm:w-52 w-40 h-14">
+          <Image
+            src="/icon.svg"
+            alt="logo"
+            fill
+            className="logo bg-contain"
+            priority
+          />
+        </div>
         <LangSwitcher lang={lang} />
       </div>
 

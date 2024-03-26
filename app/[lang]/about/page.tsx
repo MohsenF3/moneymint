@@ -25,6 +25,7 @@ export default async function About({
         <Image
           src={img}
           fill
+          priority={true}
           className="absolute object-cover w-full overflow-visible sm:rotate-90 "
           alt="Background Whirl"
         />
